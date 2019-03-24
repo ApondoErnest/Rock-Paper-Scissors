@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RockPaperScissors</title>
+    </head>
+    <body>
+        <script>
+            function computerPlay(){
+                let number = Math.floor(1 + Math.random()*3);
+                if(number == 1){
+                    return 'rock';
+                }
+                else if(number == 2){
+                    return 'paper';
+                }
+                else{
+                    return 'scissors';
+                }
+            }
+        </script>
+    </body>
+</html>
