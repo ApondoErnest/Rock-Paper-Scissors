@@ -5,18 +5,84 @@
     </head>
     <body>
         <script>
+            //enable computer pick rock, paper or scissors
             function computerPlay(){
                 let number = Math.floor(1 + Math.random()*3);
                 if(number == 1){
-                    return 'rock';
+                    return 'Rock';
                 }
                 else if(number == 2){
-                    return 'paper';
+                    return 'Paper';
                 }
                 else{
-                    return 'scissors';
+                    return 'Scissors';
                 }
             }
+             let status;//holds the result of the game
+             //play a round of the game
+             function playRound(playerSelection, computerSelection){
+                 if(playerSelection == computerSelection){
+                     return "Oh same guess, try again";
+                 }
+                 else if(playerSelection=='Rock' && computerSelection=='Paper'){
+                     status = 1;
+                     return "You lose, Your Rock was covered!";
+                 }
+                 else if(playerSelection=='Rock' && computerSelection=='Scissors'){
+                     status = 2;
+                     return "Wow, your Rock just crushed the Scissors!";
+                 }
+                 else if(playerSelection=='Paper' && computerSelection=='Rock'){
+                     status = 2;
+                     return "Good, Your Paper covered the Rock";
+                 }
+                 else if(playerSelection=='Paper' && computerSelection=='Scissors'){
+                     status = 1;
+                     return "Sorry! Your Paper was cut";
+                 }
+                 else if(playerSelection=='Scissors' && computerSelection=='Rock'){
+                    status = 1;
+                     return "Try again! Your Scissors was crushed";
+                 }
+                 else if(playerSelection=='Scissors' && computerSelection=='Paper'){
+                     status = 2;
+                     return "Excellent! you cut the Paper";
+                 }
+                 else{
+                     return "No match found";
+                 }
+             }
+             //play 5 rounds of the game and get the rusult
+             function game(){
+                 let again = 0;
+                 let computerPoint = 0;
+                 let playerPoint = 0;
+                 while(again < 5){
+                    let computerSelection = computerPlay();
+                    let playerSelection = prompt("Enter; (Rock), (Paper), or (Scissors)", 'Paper');
+                    status = 0;
+                    console.log(playRound(playerSelection, computerSelection));
+                    if(status == 1){
+                        computerPoint++;
+                    }
+                    else if(status == 2){
+                        playerPoint++;
+                    }
+                    again++;
+                }
+                console.log('Your Score: '+playerPoint+' out of 5 rounds');
+                console.log('Computer score: '+computerPoint+' out of 5 rounds');
+                if(playerPoint>computerPoint){
+                    console.log('You won!!');
+                }
+                else if(computerPoint>playerPoint){
+                    console.log('Computer won!!');
+                }
+                else if(computerPoint==playerPoint){
+                    console.log('Draw!! Try again');
+                }
+             }
+             game();//call of game function
         </script>
     </body>
 </html>
