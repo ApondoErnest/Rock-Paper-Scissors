@@ -3,7 +3,14 @@
     <head>
         <title>RockPaperScissors</title>
     </head>
-    <body>
+    <body> 
+        <div id="container">
+        <h1>Play Rock Paper Scissors Game</h1>
+        <p>Choose one button to play</p>
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+        </div>
         <script>
             //enable computer pick rock, paper or scissors
             function computerPlay(){
@@ -52,37 +59,36 @@
                      return "No match found";
                  }
              }
-             //play 5 rounds of the game and get the rusult
-             function game(){
-                 let again = 0;
-                 let computerPoint = 0;
-                 let playerPoint = 0;
-                 while(again < 5){
-                    let computerSelection = computerPlay();
-                    let playerSelection = prompt("Enter; (Rock), (Paper), or (Scissors)", 'Paper');
-                    status = 0;
-                    console.log(playRound(playerSelection, computerSelection));
-                    if(status == 1){
-                        computerPoint++;
-                    }
-                    else if(status == 2){
-                        playerPoint++;
-                    }
-                    again++;
-                }
-                console.log('Your Score: '+playerPoint+' out of 5 rounds');
-                console.log('Computer score: '+computerPoint+' out of 5 rounds');
-                if(playerPoint>computerPoint){
-                    console.log('You won!!');
-                }
-                else if(computerPoint>playerPoint){
-                    console.log('Computer won!!');
-                }
-                else if(computerPoint==playerPoint){
-                    console.log('Draw!! Try again');
-                }
+             //select elements with thier various id's
+             const container = document.querySelector('#container');
+             const btn1 = document.querySelector("#rock");
+             const btn2 = document.querySelector("#paper");
+             const btn3 = document.querySelector("#scissors");
+
+             //div to hold result of the game
+             const result = document.createElement('div');
+             result.classList.add('result');
+             //add event listeners to the buttons
+             btn1.addEventListener('click', ()=>{result.textContent = playRound('Rock', computerPlay());});
+             btn2.addEventListener('click', ()=>{result.textContent = playRound('Paper', computerPlay());});
+             btn3.addEventListener('click', ()=>{result.textContent = playRound('Scissors', computerPlay());});
+                         
+             let computerPoint;
+             let playerPoint;
+             if(status == 1){
+                computerPoint++;
              }
-             game();//call of game function
+             else if(status == 2){
+                playerPoint++;
+             }
+             else if(playerPoint == 5){
+                 result.textContent += '  wow, winner!! you reach 5 points first';
+             }
+             else if(computerPoint == 5){
+                 result.textContent += '  you lose! computer reaches 5 points first';
+             }
+             container.appendChild(result);
+  
         </script>
     </body>
 </html>
